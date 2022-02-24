@@ -1,0 +1,16 @@
+p,
+button,
+th,
+td {
+  font-family: "Century Gothic";
+  font-size: 0.9rem;
+  text-align: start;
+}
+
+#student_list {
+  border: 1px solid black;
+  width: 95vw;
+}
+#list tr:nth-child(odd) td {
+  background-color: rgb(242, 247, 203);
+}
