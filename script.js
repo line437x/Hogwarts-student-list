@@ -70,8 +70,8 @@ function createStudents() {
 
     //----- Nick name (if any) -----
     if (originalName.includes('"')) {
-      student.middleName = undefined;
-      student.nickName = originalName.substring(originalName.indexOf('"') + 1, originalName.lastIndexOf('"'));
+      student.middleName = "";
+      student.nickName = originalName.substring(originalName.indexOf('"'), originalName.lastIndexOf('"') + 1);
     }
     // // ----- Image -----
     student.image = `./images/${originalName.substring(0, originalName.indexOf(" ")).toLowerCase()}_.png`;
@@ -84,9 +84,23 @@ function createStudents() {
     let originalHouse = object.house.trim();
     student.house = originalHouse;
     student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
-    console.table(student);
+    // console.table(student);
+
+    displayStudent(student);
   });
 }
+
+//------------------- Display students -------------------
+function displayStudent(student) {
+  const clone = document.querySelector("template#student").content.cloneNode(true);
+
+  clone.querySelector("[data-field=firstname]").textContent = student.firstName + " " + student.nickName + " " + student.middleName;
+  clone.querySelector("[data-field=lastname]").textContent = student.lastName;
+  clone.querySelector("[data-field=house]").textContent = student.house;
+  //   clone.querySelector(".popup_button").addEventListener("click", openPopup);
+  document.querySelector("tbody").appendChild(clone);
+}
+
 //------------------- All filter functions -------------------
 function filterGryffindor() {}
 function filterSlytherin() {}
