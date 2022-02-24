@@ -1,10 +1,23 @@
+h1,
 p,
 button,
 th,
 td {
   font-family: "Century Gothic";
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-align: start;
+}
+h1 {
+  font-size: 1.8rem;
+}
+button {
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin: 0.2rem;
+}
+button:hover {
+  background-color: rgb(223, 215, 208);
 }
 
 #student_list {
@@ -12,5 +25,9 @@ td {
   width: 95vw;
 }
 #list tr:nth-child(odd) td {
-  background-color: rgb(242, 247, 203);
+  background-color: rgb(223, 215, 208);
+}
+th,
+td {
+  padding: 0.4rem;
 }
