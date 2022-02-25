@@ -157,10 +157,6 @@ function filterRavenclaw(student) {
   return student.house === "Ravenclaw";
 }
 
-function selectSort() {
-  console.log("sorterknap");
-}
-
 // function filterPrefects() {}
 // function filterExpelled() {}
 // function filterNonExpelled() {}
@@ -173,6 +169,47 @@ function selectSort() {
 // function removeFilter() {}
 
 // //------------------- All sort functions -------------------
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  console.log("sorterknap");
+  sortList(sortBy);
+}
+
+function sortList(sortBy) {
+  let sortedList = allStudents;
+
+  if (sortBy === "firstname") {
+    sortedList = sortedList.sort(sortByFirst);
+  } else if (sortBy === "house") {
+    sortedList = sortedList.sort(sortByHouse);
+  } else if (sortBy === "lastname") {
+    sortedList = sortedList.sort(sortByLast);
+  }
+  displayList(sortedList);
+}
+
+function sortByFirst(a, b) {
+  if (a.firstName < b.firstName) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+function sortByLast(a, b) {
+  if (a.lastName < b.lastName) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortByHouse(a, b) {
+  if (a.house < b.house) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 // function sortFirstName() {}
 // function sortLastName() {}
 // function sortHouse() {}
