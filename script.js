@@ -177,39 +177,18 @@ function selectSort(event) {
 
 function sortList(sortBy) {
   let sortedList = allStudents;
+  sortedList = sortedList.sort(sortByProperty);
 
-  if (sortBy === "firstname") {
-    sortedList = sortedList.sort(sortByFirst);
-  } else if (sortBy === "house") {
-    sortedList = sortedList.sort(sortByHouse);
-  } else if (sortBy === "lastname") {
-    sortedList = sortedList.sort(sortByLast);
+  function sortByProperty(a, b) {
+    if (a[sortBy] < b[sortBy]) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
   displayList(sortedList);
 }
 
-function sortByFirst(a, b) {
-  if (a.firstName < b.firstName) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-function sortByLast(a, b) {
-  if (a.lastName < b.lastName) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
-
-function sortByHouse(a, b) {
-  if (a.house < b.house) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
 // function sortFirstName() {}
 // function sortLastName() {}
 // function sortHouse() {}
