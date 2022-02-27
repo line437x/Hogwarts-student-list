@@ -13,7 +13,7 @@ const Student = {
 
 const settings = {
   filterBy: "all",
-  sortBy: "name",
+  sortBy: "firstName",
   sortDir: "asc",
 };
 //------------------- Setup -------------------
@@ -34,17 +34,14 @@ async function loadJSON() {
 }
 function createStudents(data) {
   allStudents = data.map(prepareObject);
-  //console.log("allStudents", allStudents);
   displayList(allStudents);
-  //displayStudent(allStudents);
 }
 //------------------- Create buttons -------------------
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
 }
-//------------------- create students -------------------
-
+//------------------- Create students / clean array -------------------
 function prepareObject(object) {
   //  allStudents.forEach((object) => {
   // Define a template for the data objects
@@ -98,15 +95,14 @@ function prepareObject(object) {
   student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
   // console.table(student);
   return student;
-  //displayStudent(student);
-  //});
-  // displayList(allStudents);
 }
+
+//------------------- Display students/list -------------------
 function displayList(list) {
   document.querySelector("tbody").innerHTML = "";
   list.forEach((student) => displayStudent(student));
 }
-//------------------- Display students -------------------
+//------------------- Define students -------------------
 function displayStudent(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
@@ -116,32 +112,37 @@ function displayStudent(student) {
   //   clone.querySelector(".popup_button").addEventListener("click", openPopup);
   document.querySelector("tbody").appendChild(clone);
 }
+//------------------- Build new list -------------------
+function buildList() {
+  const currentList = filterList(allStudents);
+  const sortedList = sortList(currentList);
 
+  displayList(sortedList);
+}
 //------------------- All filter functions -------------------
-function filterList(filterBy) {
-  let filteredList = allStudents;
-  // console.log(filteredList);
+function filterList(filteredList) {
+  // let filteredList = allStudents;
 
-  if (filterBy === "gryffindor") {
+  if (settings.filterBy === "gryffindor") {
     filteredList = allStudents.filter(filterGryffindor);
-    console.log(filteredList);
-  } else if (filterBy === "slytherin") {
+  } else if (settings.filterBy === "slytherin") {
     filteredList = allStudents.filter(filterSlytherin);
-    console.log(filteredList);
-  } else if (filterBy === "hufflepuff") {
+  } else if (settings.filterBy === "hufflepuff") {
     filteredList = allStudents.filter(filterHufflepuff);
-    console.log(filteredList);
-  } else if (filterBy === "ravenclaw") {
+  } else if (settings.filterBy === "ravenclaw") {
     filteredList = allStudents.filter(filterRavenclaw);
-    console.log(filteredList);
   }
-  displayList(filteredList);
+  return filteredList;
 }
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   console.log(filter);
-  filterList(filter);
+  setFilter(filter);
+}
+function setFilter(filter) {
+  settings.filterBy = filter;
+  buildList();
 }
 
 function filterGryffindor(student) {
@@ -179,14 +180,18 @@ function selectSort(event) {
   } else {
     event.target.dataset.sortDirection = "asc";
   }
-  console.log(`user selected ${sortBy} - ${sortDir}`);
-  sortList(sortBy, sortDir);
+  // console.log(`user selected ${sortBy} - ${sortDir}`);
+  setSort(sortBy, sortDir);
+}
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
 }
 
-function sortList(sortBy, sortDir) {
-  let sortedList = allStudents;
+function sortList(sortedList) {
   let direction = 1;
-  if (sortDir === "desc") {
+  if (settings.sortDir === "desc") {
     direction = -1;
   } else {
   }
@@ -194,13 +199,13 @@ function sortList(sortBy, sortDir) {
   sortedList = sortedList.sort(sortByProperty);
 
   function sortByProperty(a, b) {
-    if (a[sortBy] < b[sortBy]) {
+    if (a[settings.sortBy] < b[settings.sortBy]) {
       return -1 * direction;
     } else {
       return 1 * direction;
     }
   }
-  displayList(sortedList);
+  return sortedList;
 }
 
 // function sortFirstName() {}
