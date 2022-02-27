@@ -9,6 +9,7 @@ const Student = {
   firstName: "",
   lastName: "",
   house: "",
+  gender: "",
 };
 
 const settings = {
@@ -93,6 +94,12 @@ function prepareObject(object) {
   let originalHouse = object.house.trim();
   student.house = originalHouse;
   student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
+
+  // ----- Gender -----
+  let originalGender = object.gender.trim();
+  student.gender = originalGender;
+  student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
+
   // console.table(student);
   return student;
 }
@@ -131,13 +138,17 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(filterHufflepuff);
   } else if (settings.filterBy === "ravenclaw") {
     filteredList = allStudents.filter(filterRavenclaw);
+  } else if (settings.filterBy === "boys") {
+    filteredList = allStudents.filter(filterBoys);
+  } else if (settings.filterBy === "girls") {
+    filteredList = allStudents.filter(filterGirls);
   }
   return filteredList;
 }
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
-  console.log(filter);
+  // console.log(filter);
   setFilter(filter);
 }
 function setFilter(filter) {
@@ -157,13 +168,18 @@ function filterHufflepuff(student) {
 function filterRavenclaw(student) {
   return student.house === "Ravenclaw";
 }
+function filterBoys(student) {
+  return student.gender === "Boy";
+}
+function filterGirls(student) {
+  return student.gender === "Girl";
+}
 
 // function filterPrefects() {}
 // function filterExpelled() {}
 // function filterNonExpelled() {}
 // function filterSquad() {}
-// function filterBoys() {}
-// function filterGirls() {}
+
 // function filterPureBlood() {}
 // function filterHalfBlood() {}
 // function filterMuggle() {}
