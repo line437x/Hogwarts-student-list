@@ -44,9 +44,10 @@
       <thead>
         <tr id="sorting">
           <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🎖</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="details">View details</th>
         </tr>
       </thead>
       <tbody id="list">
@@ -60,6 +61,9 @@
         <td data-field="firstname">FIRSTNAME</td>
         <td data-field="lastname">LASTNAME</td>
         <td data-field="house">HOUSE</td>
+        <td>
+          <button id="read_more_button" class="details">Read more</button>
+        </td>
       </tr>
     </template>
     <script src="script.js"></script>
