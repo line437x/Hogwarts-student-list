@@ -19,6 +19,11 @@ button {
 button:hover {
   background-color: rgb(223, 215, 208);
 }
+#read_more_button {
+  border: none;
+  text-decoration-line: underline;
+  font-weight: 600;
+}
 
 #student_list {
   border: 1px solid black;
