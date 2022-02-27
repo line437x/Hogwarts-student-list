@@ -4,13 +4,13 @@ window.addEventListener("DOMContentLoaded", setup);
 //------------------- Variables -------------------
 let allStudents = [];
 
-const Student = {
-  prefect: false,
-  firstName: "",
-  lastName: "",
-  house: "",
-  gender: "",
-};
+// const Student = {
+//   prefect: false,
+//   firstName: "",
+//   lastName: "",
+//   house: "",
+//   gender: "",
+// };
 
 const settings = {
   filterBy: "all",
@@ -23,7 +23,6 @@ function setup() {
   registerButtons();
   loadJSON();
 }
-
 //------------------- JSON -------------------
 async function loadJSON() {
   const url = "https://petlatkea.dk/2021/hogwarts/students.json";
@@ -47,12 +46,14 @@ function prepareObject(object) {
   //  allStudents.forEach((object) => {
   // Define a template for the data objects
   const Student = {
+    prefect: false,
     firstName: "",
     lastName: "",
     middleName: "",
     nickName: "",
     image: "",
     house: "",
+    gender: "",
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -103,7 +104,6 @@ function prepareObject(object) {
   // console.table(student);
   return student;
 }
-
 //------------------- Display students/list -------------------
 function displayList(list) {
   document.querySelector("tbody").innerHTML = "";
@@ -116,7 +116,20 @@ function displayStudent(student) {
   clone.querySelector("[data-field=firstname]").textContent = student.firstName + " " + student.nickName + " " + student.middleName;
   clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
-  //   clone.querySelector(".popup_button").addEventListener("click", openPopup);
+
+  //Prefects
+  clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+  function clickPrefect() {
+    console.log(student);
+    if (student.prefect === true) {
+      student.prefect = false;
+    } else {
+      student.prefect = true;
+    }
+    buildList();
+  }
+
   document.querySelector("tbody").appendChild(clone);
 }
 //------------------- Build new list -------------------
@@ -170,7 +183,6 @@ function filterBoys(student) {
 function filterGirls(student) {
   return student.gender === "Girl";
 }
-
 // function filterPrefects() {}
 // function filterExpelled() {}
 // function filterNonExpelled() {}
@@ -207,7 +219,6 @@ function setSort(sortBy, sortDir) {
   settings.sortDir = sortDir;
   buildList();
 }
-
 function sortList(sortedList) {
   let direction = 1;
   if (settings.sortDir === "desc") {
@@ -226,11 +237,6 @@ function sortList(sortedList) {
   }
   return sortedList;
 }
-
-// function sortFirstName() {}
-// function sortLastName() {}
-// function sortHouse() {}
-// function sortPrefects() {}
 
 // //------------------- Search function -------------------
 // function search() {}
