@@ -171,19 +171,33 @@ function filterRavenclaw(student) {
 // //------------------- All sort functions -------------------
 function selectSort(event) {
   const sortBy = event.target.dataset.sort;
-  console.log("sorterknap");
-  sortList(sortBy);
+  const sortDir = event.target.dataset.sortDirection;
+
+  // toogle the direction
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+  console.log(`user selected ${sortBy} - ${sortDir}`);
+  sortList(sortBy, sortDir);
 }
 
-function sortList(sortBy) {
+function sortList(sortBy, sortDir) {
   let sortedList = allStudents;
+  let direction = 1;
+  if (sortDir === "desc") {
+    direction = -1;
+  } else {
+  }
+
   sortedList = sortedList.sort(sortByProperty);
 
   function sortByProperty(a, b) {
     if (a[sortBy] < b[sortBy]) {
-      return -1;
+      return -1 * direction;
     } else {
-      return 1;
+      return 1 * direction;
     }
   }
   displayList(sortedList);
