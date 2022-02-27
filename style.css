@@ -36,3 +36,22 @@ th,
 td {
   padding: 0.4rem;
 }
+th.sortby[data-sort-direction="asc"]::after {
+  content: " ▼";
+  font-size: 0.8rem;
+}
+th.sortby[data-sort-direction="desc"]::after {
+  content: " ▲";
+  font-size: 0.8rem;
+}
+/* style on prefect*/
+th[data-sort="prefect"] {
+  font-size: 1.5rem;
+}
+td[data-field="prefect"]::after {
+  content: "🎖";
+  font-size: 1.5rem;
+}
+td[data-field="prefect"][data-prefect="false"]::after {
+  filter: grayscale(100%);
+}

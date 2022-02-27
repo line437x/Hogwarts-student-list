@@ -128,8 +128,6 @@ function buildList() {
 }
 //------------------- All filter functions -------------------
 function filterList(filteredList) {
-  // let filteredList = allStudents;
-
   if (settings.filterBy === "gryffindor") {
     filteredList = allStudents.filter(filterGryffindor);
   } else if (settings.filterBy === "slytherin") {
@@ -145,7 +143,6 @@ function filterList(filteredList) {
   }
   return filteredList;
 }
-
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   // console.log(filter);
@@ -155,7 +152,6 @@ function setFilter(filter) {
   settings.filterBy = filter;
   buildList();
 }
-
 function filterGryffindor(student) {
   return student.house === "Gryffindor";
 }
@@ -189,6 +185,13 @@ function filterGirls(student) {
 function selectSort(event) {
   const sortBy = event.target.dataset.sort;
   const sortDir = event.target.dataset.sortDirection;
+
+  // find old sorting element
+  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  oldElement.classList.remove("sortby");
+
+  // show arrow and indicate whats sorting / add class to active sort
+  event.target.classList.add("sortby");
 
   // toogle the direction
   if (sortDir === "asc") {
