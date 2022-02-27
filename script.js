@@ -34,7 +34,7 @@ async function loadJSON() {
 }
 function createStudents(data) {
   allStudents = data.map(prepareObject);
-  displayList(allStudents);
+  buildList();
 }
 //------------------- Create buttons -------------------
 function registerButtons() {
