@@ -125,7 +125,7 @@ function displayStudent(student) {
     if (student.prefect === true) {
       student.prefect = false;
     } else {
-      student.prefect = true;
+      tryToMakePrefect(student);
     }
     buildList();
   }
@@ -242,7 +242,53 @@ function sortList(sortedList) {
 // function search() {}
 
 // //------------------- All toogle functions -------------------
-// function makePrefect() {}
+function tryToMakePrefect(selectedStudent) {
+  const prefects = allStudents.filter((student) => student.prefect);
+  const numberOfPrefects = prefects.length;
+  const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
+  // if there is there are another from the same house
+  if (other != undefined) {
+    console.log("there can be only one prefect of each house");
+    removeOther(other);
+  } else if (numberOfPrefects >= 2) {
+    console.log("there can only be two prefects");
+    removeAorB(prefects[0], prefects[1]);
+  } else {
+    makePrefect(selectedStudent);
+  }
+
+  // just for testing!
+  // makePrefect(selectedStudent);
+
+  function removeOther(other) {
+    //ask user to ignore or revome another 'other'
+
+    // if ignore - do nothing
+
+    // if remove other:
+    removePrefect(other);
+    makePrefect(selectedStudent);
+  }
+  function removeAorB(prefectA, prefectB) {
+    // ask user to ignore or remove a/b
+
+    // if ignore - do nothing
+
+    // if removeA
+    removePrefect(prefectA);
+    makePrefect(selectedStudent);
+
+    // else - if removeB
+    removePrefect(prefectB);
+    makePrefect(selectedStudent);
+  }
+  function removePrefect(prefectStudent) {
+    student.prefect = false;
+  }
+  function makePrefect(student) {
+    student.prefect = true;
+  }
+}
 // function undoPrefect() {}
 // function makeSquadMember() {}
 
