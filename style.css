@@ -1,3 +1,13 @@
+header {
+  display: flex;
+  justify-content: center;
+}
+
+#header_logo {
+  height: auto;
+  width: 12rem;
+}
+
 h1,
 p,
 button,
@@ -9,6 +19,13 @@ td {
 }
 h1 {
   font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+h2,
+h3,
+h4 {
+  font-family: "Century Gothic";
 }
 button {
   background-color: transparent;
@@ -27,7 +44,7 @@ button:hover {
 
 #student_list {
   border: 1px solid black;
-  width: 95vw;
+  /* width: 95vw; */
 }
 #list tr:nth-child(odd) td {
   background-color: rgb(223, 215, 208);
@@ -54,4 +71,25 @@ td[data-field="prefect"]::after {
 }
 td[data-field="prefect"][data-prefect="false"]::after {
   filter: grayscale(100%);
+}
+
+#info_box {
+  /* background-color: rgb(223, 215, 208); */
+  padding: 0.6rem;
+  height: fit-content;
+  border: 1px solid black;
+}
+
+/* indsæt mediaquery */
+@media screen and (min-width: 1000px) {
+  #content_container {
+    display: flex;
+    justify-content: center;
+  }
+  #list_section {
+    margin-left: 2rem;
+  }
+  #student_list {
+    width: 60rem;
+  }
 }

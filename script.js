@@ -4,14 +4,6 @@ window.addEventListener("DOMContentLoaded", setup);
 //------------------- Variables -------------------
 let allStudents = [];
 
-// const Student = {
-//   prefect: false,
-//   firstName: "",
-//   lastName: "",
-//   house: "",
-//   gender: "",
-// };
-
 const settings = {
   filterBy: "all",
   sortBy: "firstName",

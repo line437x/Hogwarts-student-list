@@ -7,65 +7,93 @@
     <title>Hogwart Student List</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <h1>Hogwart Student List</h1>
-    <p>
-      Filter by house:
-      <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-      <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-      <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
-      <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-    </p>
-    <p>
-      Filter by status:
-      <!-- <button class="filter" data-action="filter" data-filter="prefect">Prefects</button> -->
-      <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
-      <button class="filter" data-action="filter" data-filter="nonexpelled">Non Expelled students</button>
-      <!-- <button class="filter" data-action="filter" data-filter="squad">Inquisitorial squad</button> -->
-    </p>
-    <p>
-      Filter by gender:
-      <button class="filter" data-action="filter" data-filter="boys">Boys</button>
-      <button class="filter" data-action="filter" data-filter="girls">Girls</button>
-    </p>
-    <!-- <p>
+    <header>
+      <img id="header_logo" src="hogwarts.svg" alt="Hogwarts Logo" />
+    </header>
+    <main>
+      <h1>Hogwarts Student List</h1>
+      <section id="content_container">
+        <section id="left_side">
+          <div id="info_box">
+            <h3>Hogwarts student informations</h3>
+            <h4>House members:</h4>
+            <p>Gryffindor:</p>
+            <p>Slytherin:</p>
+            <p>Hufflepuff:</p>
+            <p>Ravenclaw:</p>
+            <h4>Expelled / non expelled students:</h4>
+            <p>Number of expelled students:</p>
+            <p>Number of non expelled students:</p>
+          </div>
+          <div id="filter_section">
+            <h3>Filtering</h3>
+            <p>
+              Filter by house:
+              <br />
+              <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+              <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+              <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
+              <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+            </p>
+            <p>
+              Filter by status:
+              <br />
+              <!-- <button class="filter" data-action="filter" data-filter="prefect">Prefects</button> -->
+              <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
+              <button class="filter" data-action="filter" data-filter="nonexpelled">Non Expelled students</button>
+              <!-- <button class="filter" data-action="filter" data-filter="squad">Inquisitorial squad</button> -->
+            </p>
+            <p>
+              Filter by gender:
+              <br />
+              <button class="filter" data-action="filter" data-filter="boys">Boys</button>
+              <button class="filter" data-action="filter" data-filter="girls">Girls</button>
+            </p>
+            <!-- <p>
       Filter by blood status:
       <button class="filter" data-action="filter" data-filter="pureblood">Pure blood</button>
       <button class="filter" data-action="filter" data-filter="halfblood">Half blood</button>
       <button class="filter" data-action="filter" data-filter="muggle">Muggles</button>
     </p> -->
-    <p>
-      <button class="filter" data-action="filter" data-filter="*">Remove filter</button>
-    </p>
+            <p>
+              <button class="filter" data-action="filter" data-filter="*">Remove filter</button>
+            </p>
+          </div>
+        </section>
 
-    <hr />
+        <!-- <hr /> -->
+        <div id="list_section">
+          <table id="student_list">
+            <thead>
+              <tr id="sorting">
+                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🎖</th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+                <th>View details</th>
+              </tr>
+            </thead>
+            <tbody id="list">
+              <!-- student template will be copied and inserted here -->
+            </tbody>
+          </table>
 
-    <table id="student_list">
-      <thead>
-        <tr id="sorting">
-          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🎖</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
-          <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-          <th>View details</th>
-        </tr>
-      </thead>
-      <tbody id="list">
-        <!-- student template will be copied and inserted here -->
-      </tbody>
-    </table>
-
-    <template id="student">
-      <tr>
-        <td data-field="prefect" data-prefect="false"></td>
-        <td data-field="firstname">FIRSTNAME</td>
-        <td data-field="lastname">LASTNAME</td>
-        <td data-field="house">HOUSE</td>
-        <td>
-          <button id="read_more_button" class="details">Read more</button>
-        </td>
-      </tr>
-    </template>
-    <script src="script.js"></script>
+          <template id="student">
+            <tr>
+              <td data-field="prefect" data-prefect="false"></td>
+              <td data-field="firstname">FIRSTNAME</td>
+              <td data-field="lastname">LASTNAME</td>
+              <td data-field="house">HOUSE</td>
+              <td>
+                <button id="read_more_button" class="details">Read more</button>
+              </td>
+            </tr>
+          </template>
+        </div>
+      </section>
+      <script src="script.js"></script>
+    </main>
   </body>
 </html>
