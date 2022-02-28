@@ -8,24 +8,26 @@ header {
   width: 12rem;
 }
 
-h1,
 p,
 button,
 th,
 td {
-  font-family: "Century Gothic";
-  font-size: 0.8rem;
+  font-family: "IM Fell English", serif;
+  /* font-family: "Century Gothic"; */
+  font-size: 0.95rem;
   text-align: start;
 }
 h1 {
-  font-size: 1.8rem;
+  font-family: "IM Fell English", serif;
+  font-style: italic;
+  font-size: 2.3rem;
   text-align: center;
   margin-bottom: 3rem;
 }
 h2,
 h3,
 h4 {
-  font-family: "Century Gothic";
+  font-family: "IM Fell English", serif;
 }
 button {
   background-color: transparent;
@@ -66,7 +68,7 @@ th[data-sort="prefect"] {
   font-size: 1.5rem;
 }
 td[data-field="prefect"]::after {
-  content: "🎖";
+  content: "🛡";
   font-size: 1.5rem;
 }
 td[data-field="prefect"][data-prefect="false"]::after {
@@ -90,6 +92,6 @@ td[data-field="prefect"][data-prefect="false"]::after {
     margin-left: 2rem;
   }
   #student_list {
-    width: 60rem;
+    width: 50rem;
   }
 }

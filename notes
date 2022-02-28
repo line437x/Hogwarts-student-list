@@ -1,0 +1,26 @@
+WHAT TO DO??
+
+- Display length of array in showning list (DONE!!)
+
+- Display informations about hogwarts
+
+- Create popup
+    - Displaying:
+        - Image
+        - Fullname
+        - Firstname
+        - Middle name (if any)
+        - Nick name (if any)
+        - Last name
+        - Fullname
+        - House Crest + color
+        - Blood status
+        - Prefect or not
+        - Expelled or not
+        - Member of inquisitorial squad or not
+
+- Create function that can expell student
+
+- Create function that can make student prefect og not
+
+- Create a function that can hack the system

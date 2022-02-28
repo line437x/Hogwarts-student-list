@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hogwart Student List</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
   </head>
 
   <body>
@@ -16,8 +19,12 @@
       <h1>Hogwarts Student List</h1>
       <section id="content_container">
         <section id="left_side">
+          <div class="search_wrapper">
+            <h3>Search</h3>
+            <input type="text" name="searchbar" id="searchbar" placeholder="Search for students..." />
+          </div>
+          <h3>General student information</h3>
           <div id="info_box">
-            <h3>Hogwarts student informations</h3>
             <h4>House members:</h4>
             <p>Gryffindor:</p>
             <p>Slytherin:</p>
@@ -66,9 +73,10 @@
         <!-- <hr /> -->
         <div id="list_section">
           <table id="student_list">
+            <p id="number_of_students">Displaying list of xx students</p>
             <thead>
               <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🎖</th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🛡</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>

@@ -129,6 +129,9 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
 
+  // display number of students
+  document.querySelector("#number_of_students").textContent = `Showing ${sortedList.length} students`;
+
   displayList(sortedList);
 }
 //------------------- All filter functions -------------------
