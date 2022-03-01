@@ -129,10 +129,35 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
 
-  // display number of students
-  document.querySelector("#number_of_students").textContent = `Showing ${sortedList.length} students`;
+  displayInfoBox(sortedList);
 
   displayList(sortedList);
+}
+function displayInfoBox(sortedList) {
+  // Display number of students
+  document.querySelector("#number_of_students").textContent = `Showing ${sortedList.length} students`;
+
+  // Diaplay infobox /factbox
+  let gryffindor = 0;
+  for (let obj of allStudents) {
+    if (obj.house === "Gryffindor") gryffindor++;
+    document.querySelector("#info_box [data-field=gryffindor]").textContent = " " + gryffindor;
+  }
+  let slytherin = 0;
+  for (let obj of allStudents) {
+    if (obj.house === "Slytherin") slytherin++;
+    document.querySelector("#info_box [data-field=slytherin]").textContent = " " + slytherin;
+  }
+  let hufflepuff = 0;
+  for (let obj of allStudents) {
+    if (obj.house === "Hufflepuff") hufflepuff++;
+    document.querySelector("#info_box [data-field=hufflepuff]").textContent = " " + hufflepuff;
+  }
+  let ravenclaw = 0;
+  for (let obj of allStudents) {
+    if (obj.house === "Ravenclaw") ravenclaw++;
+    document.querySelector("#info_box [data-field=ravenclaw]").textContent = " " + ravenclaw;
+  }
 }
 //------------------- All filter functions -------------------
 function filterList(filteredList) {
@@ -153,7 +178,6 @@ function filterList(filteredList) {
 }
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
-  // console.log(filter);
   setFilter(filter);
 }
 function setFilter(filter) {
