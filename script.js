@@ -126,6 +126,7 @@ function displayStudent(student) {
 
   document.querySelector("tbody").appendChild(clone);
 }
+// //------------------- Pop-up -------------------
 function showPopUp(student) {
   document.querySelector("#pop_up").classList.remove("hide");
 
@@ -179,11 +180,9 @@ function showPopUp(student) {
     document.querySelector("#expel_student").style.backgroundColor = "#F2F2F2";
   }
 }
-
 function closePopUp() {
   document.querySelector("#pop_up").classList.add("hide");
 }
-
 function expelStudent() {
   console.log("expel student");
 }
@@ -196,6 +195,7 @@ function buildList() {
 
   displayList(sortedList);
 }
+//------------------- Info box -------------------
 function displayInfoBox(sortedList) {
   // Display number of students
   document.querySelector("#number_of_students").textContent = `Showing ${sortedList.length} students`;
@@ -390,4 +390,3 @@ function tryToMakePrefect(selectedStudent) {
 // function hackSystem() {}
 
 // //------------------- Pop-up -------------------
-// function showStudentDetails() {}

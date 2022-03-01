@@ -2,6 +2,10 @@ header {
   display: flex;
   justify-content: center;
 }
+img {
+  height: auto;
+  width: 100%;
+}
 
 #header_logo {
   height: auto;
@@ -49,7 +53,7 @@ button:hover {
   /* width: 95vw; */
 }
 #list tr:nth-child(odd) td {
-  background-color: rgb(223, 215, 208);
+  background-color: rgb(221, 221, 216);
 }
 th,
 td {
@@ -106,7 +110,7 @@ td[data-field="prefect"][data-prefect="false"]::after {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(245, 222, 179, 0.664);
+  background-color: rgba(216, 216, 216, 0.664);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,7 +119,7 @@ td[data-field="prefect"][data-prefect="false"]::after {
 .dialog {
   box-shadow: 1px 1px 10px black;
   padding: 4rem;
-  background-color: rgb(241, 213, 151);
+  background-color: rgb(155, 152, 146);
   position: relative;
 }
 .dialog h2 {
@@ -129,6 +133,13 @@ td[data-field="prefect"][data-prefect="false"]::after {
 .hide {
   visibility: hidden;
 }
+.pop_up_content {
+  display: grid;
+}
+.crest_img {
+  place-self: center;
+  margin: 1rem;
+}
 
 /* indsæt mediaquery */
 @media screen and (min-width: 1000px) {
@@ -141,5 +152,15 @@ td[data-field="prefect"][data-prefect="false"]::after {
   }
   #student_list {
     width: 50rem;
+  }
+  .pop_up_content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .pop_up_texst {
+    grid-column: 2/3;
+  }
+  .student_pic {
+    width: fit-content;
   }
 }
