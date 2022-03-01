@@ -32,6 +32,7 @@ function createStudents(data) {
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  document.querySelector("#search").addEventListener("input", searchFieldInput);
 }
 //------------------- Create students / clean array -------------------
 function prepareObject(object) {
@@ -319,8 +320,16 @@ function sortList(sortedList) {
   return sortedList;
 }
 
-// //------------------- Search function -------------------
-// function search() {}
+//------------------- Search function -------------------
+function searchFieldInput(evt) {
+  // Write to the list with only those elemnts in the allStudents array that has properties containing the search frase
+  displayList(
+    allStudents.filter((elm) => {
+      // Comparing in uppercase so that m is the same as M
+      return elm.firstName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.lastName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.house.toUpperCase().includes(evt.target.value.toUpperCase());
+    })
+  );
+}
 
 // //------------------- All toogle functions -------------------
 function tryToMakePrefect(selectedStudent) {
