@@ -82,6 +82,36 @@ td[data-field="prefect"][data-prefect="false"]::after {
   border: 1px solid black;
 }
 
+#remove_other,
+#remove_aorb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(245, 222, 179, 0.664);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dialog {
+  box-shadow: 1px 1px 10px black;
+  padding: 4rem;
+  background-color: rgb(241, 213, 151);
+  position: relative;
+}
+.dialog h2 {
+  margin-top: 0rem;
+}
+.close_button {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+.hide {
+  visibility: hidden;
+}
+
 /* indsæt mediaquery */
 @media screen and (min-width: 1000px) {
   #content_container {

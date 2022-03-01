@@ -238,53 +238,56 @@ function sortList(sortedList) {
 
 // //------------------- All toogle functions -------------------
 function tryToMakePrefect(selectedStudent) {
-  const prefects = allStudents.filter((student) => student.prefect);
+  const prefects = allStudents.filter((student) => student.prefect && student.house === selectedStudent.house);
   const numberOfPrefects = prefects.length;
-  const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
-  // if there is there are another from the same house
-  if (other != undefined) {
-    console.log("there can be only one prefect of each house");
-    removeOther(other);
-  } else if (numberOfPrefects >= 2) {
-    console.log("there can only be two prefects");
+
+  if (numberOfPrefects >= 2) {
+    console.log("there can only be two prefects of each house");
     removeAorB(prefects[0], prefects[1]);
   } else {
     makePrefect(selectedStudent);
   }
 
-  // just for testing!
-  // makePrefect(selectedStudent);
-
-  function removeOther(other) {
-    //ask user to ignore or revome another 'other'
-
-    // if ignore - do nothing
-
-    // if remove other:
-    removePrefect(other);
-    makePrefect(selectedStudent);
-  }
   function removeAorB(prefectA, prefectB) {
     // ask user to ignore or remove a/b
+    document.querySelector("#remove_aorb").classList.remove("hide");
+    document.querySelector("#remove_aorb .close_button").addEventListener("click", closeDialog);
+    document.querySelector("#remove_aorb #remove_a").addEventListener("click", clickRemoveA);
+    document.querySelector("#remove_aorb #remove_b").addEventListener("click", clickRemoveB);
+
+    // Display names on prefects
+    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = prefectA.firstName;
+    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = prefectB.firstName;
 
     // if ignore - do nothing
-
+    function closeDialog() {
+      document.querySelector("#remove_aorb").classList.add("hide");
+      document.querySelector("#remove_aorb .close_button").removeEventListener("click", closeDialog);
+      document.querySelector("#remove_aorb #remove_a").removeEventListener("click", clickRemoveA);
+      document.querySelector("#remove_aorb #remove_b").removeEventListener("click", clickRemoveB);
+    }
     // if removeA
-    removePrefect(prefectA);
-    makePrefect(selectedStudent);
-
-    // else - if removeB
-    removePrefect(prefectB);
-    makePrefect(selectedStudent);
+    function clickRemoveA() {
+      removePrefect(prefectA);
+      makePrefect(selectedStudent);
+      buildList();
+      closeDialog();
+    }
+    // if removeB
+    function clickRemoveB() {
+      removePrefect(prefectB);
+      makePrefect(selectedStudent);
+      buildList();
+      closeDialog();
+    }
   }
-  function removePrefect(prefectStudent) {
+  function removePrefect(student) {
     student.prefect = false;
   }
   function makePrefect(student) {
     student.prefect = true;
   }
 }
-// function undoPrefect() {}
 // function makeSquadMember() {}
 
 // //------------------- All non reversible functions -------------------

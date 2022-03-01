@@ -100,6 +100,28 @@
             </tr>
           </template>
         </div>
+        <div id="remove_other" class="modal hide">
+          <div class="dialog">
+            <button class="close_button">X</button>
+            <h2>Warning!</h2>
+            <p>There can only be two prefects per house</p>
+            <p>Do you want to remove the other prefect?</p>
+            <button id="removeother">Remove <span data-field="otherPrefect">other</span></button>
+          </div>
+        </div>
+
+        <div id="remove_aorb" class="modal hide">
+          <div class="dialog">
+            <button class="close_button">X</button>
+            <h2>Warning!</h2>
+            <p>There can only be two prefects per house</p>
+            <p>Do you want to remove the one of the other prefects?</p>
+            <div class="sidebyside">
+              <button id="remove_a">Remove <span data-field="prefectA">A</span></button>
+              <button id="remove_b">Remove <span data-field="prefectB">B</span></button>
+            </div>
+          </div>
+        </div>
       </section>
       <script src="script.js"></script>
     </main>
