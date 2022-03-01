@@ -108,6 +108,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=firstname]").textContent = student.firstName + " " + student.nickName + " " + student.middleName;
   clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
+  clone.querySelector("#read_more_button").addEventListener("click", () => showPopUp(student));
 
   //Prefects
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
@@ -123,6 +124,67 @@ function displayStudent(student) {
   }
 
   document.querySelector("tbody").appendChild(clone);
+}
+function showPopUp(student) {
+  document.querySelector("#pop_up").classList.remove("hide");
+
+  document.querySelector("#pop_up .close_button").addEventListener("click", closePopUp);
+  document.querySelector("#pop_up #expel_student").addEventListener("click", expelStudent);
+
+  document.querySelector("#pop_up .fullname").textContent = student.firstName + " " + student.nickName + " " + student.middleName + " " + student.lastName;
+  document.querySelector("#pop_up .firstname").textContent = "First name:" + " " + student.firstName;
+  document.querySelector("#pop_up .lastname").textContent = "Last name:" + " " + student.lastName;
+
+  // Only show nick name if any
+  if (student.nickName === "") {
+    document.querySelector("#pop_up .nickname").textContent = student.nickName;
+  } else {
+    document.querySelector("#pop_up .nickname").textContent = "Nick name:" + " " + student.nickName;
+  }
+
+  // Only show middle name if any
+  if (student.middleName === " " || student.middleName === "") {
+    document.querySelector("#pop_up .middlename").textContent = student.middleName;
+  } else {
+    document.querySelector("#pop_up .middlename").textContent = "Middle name:" + " " + student.middleName;
+  }
+
+  // Show if prefect or not
+  if (student.prefect === true) {
+    document.querySelector("#pop_up .status").textContent = " " + "yes";
+  } else if (student.prefect === false) {
+    document.querySelector("#pop_up .status").textContent = " " + "no";
+  }
+
+  // show student image
+  document.querySelector(".student_pic").src = student.image;
+
+  // Change color and crest on popup according to house
+  if (student.house === "Gryffindor") {
+    document.querySelector(".crest_img").src = "crest/Gryffindor.svg";
+    document.querySelector("#pop_up_wrapper").style.backgroundColor = "#650100";
+  } else if (student.house === "Slytherin") {
+    document.querySelector(".crest_img").src = "crest/Slytherin.svg";
+    document.querySelector("#pop_up_wrapper").style.backgroundColor = "#2E751B";
+  } else if (student.house === "Hufflepuff") {
+    document.querySelector(".crest_img").src = "crest/Hufflepuff.svg";
+    document.querySelector("#pop_up_wrapper").style.backgroundColor = "#1F1E18";
+    document.querySelector("#pop_up_wrapper").style.color = "#F2F2F2";
+    document.querySelector("#expel_student").style.backgroundColor = "#F2F2F2";
+  } else if (student.house === "Ravenclaw") {
+    document.querySelector(".crest_img").src = "crest/Rawenclaw.svg";
+    document.querySelector("#pop_up_wrapper").style.backgroundColor = "#1A3956";
+    document.querySelector("#pop_up_wrapper").style.color = "#F2F2F2";
+    document.querySelector("#expel_student").style.backgroundColor = "#F2F2F2";
+  }
+}
+
+function closePopUp() {
+  document.querySelector("#pop_up").classList.add("hide");
+}
+
+function expelStudent() {
+  console.log("expel student");
 }
 //------------------- Build new list -------------------
 function buildList() {

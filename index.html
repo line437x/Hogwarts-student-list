@@ -77,7 +77,7 @@
             <p id="number_of_students"></p>
             <thead>
               <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">🛡</th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="firstName">First name</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="lastName">Last name</th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
@@ -101,6 +101,25 @@
             </tr>
           </template>
         </div>
+        <div id="pop_up" class="hide">
+          <div id="pop_up_wrapper" class="dialog">
+            <button class="close_button">X</button>
+            <img class="student_pic" src="" alt="" />
+            <img class="crest_img" src="" alt="" />
+            <h3 class="fullname"></h3>
+            <p class="firstname"></p>
+            <p class="nickname"></p>
+            <p class="middlename"></p>
+            <p class="lastname"></p>
+            <img class="student_pic" src="" alt="" />
+            <p>Blood status:</p>
+            <p class="prefect">Prefect?<span class="status"></span></p>
+            <p>Expelled or not</p>
+            <p>Member of inquisitorial squad?</p>
+            <button id="expel_student">Expel this student</button>
+          </div>
+        </div>
+
         <div id="remove_other" class="modal hide">
           <div class="dialog">
             <button class="close_button">X</button>

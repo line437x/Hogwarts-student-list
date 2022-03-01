@@ -64,9 +64,6 @@ th.sortby[data-sort-direction="desc"]::after {
   font-size: 0.8rem;
 }
 /* style on prefect*/
-th[data-sort="prefect"] {
-  font-size: 1.5rem;
-}
 td[data-field="prefect"]::after {
   content: "🛡";
   font-size: 1.5rem;
@@ -81,6 +78,26 @@ td[data-field="prefect"][data-prefect="false"]::after {
   height: fit-content;
   border: 1px solid black;
 }
+/* ------------styling af popup------------ */
+#pop_up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: rgba(64, 80, 71, 0.664);
+  justify-content: center;
+  align-items: center;
+}
+#pop_up .dialog {
+  background-color: rgb(133, 158, 138);
+}
+.crest_img {
+  height: auto;
+  width: 5rem;
+  background-color: transparent;
+}
 
 #remove_other,
 #remove_aorb {
@@ -94,6 +111,7 @@ td[data-field="prefect"][data-prefect="false"]::after {
   justify-content: center;
   align-items: center;
 }
+
 .dialog {
   box-shadow: 1px 1px 10px black;
   padding: 4rem;
