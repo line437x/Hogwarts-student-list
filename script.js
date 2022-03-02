@@ -452,7 +452,6 @@ function tryToMakePrefect(selectedStudent) {
     student.prefect = true;
   }
 }
-// function makeSquadMember() {}
 
 // //------------------- All non reversible functions -------------------
 // function expelStudent() {}
