@@ -68,11 +68,27 @@ th.sortby[data-sort-direction="desc"]::after {
   font-size: 0.8rem;
 }
 /* style on prefect*/
+td[data-field="prefect"] {
+  text-align: center;
+}
+
 td[data-field="prefect"]::after {
   content: "🛡";
   font-size: 1.5rem;
 }
 td[data-field="prefect"][data-prefect="false"]::after {
+  filter: grayscale(100%);
+}
+/* style on i-squad*/
+td[data-field="squad"] {
+  text-align: center;
+}
+
+td[data-field="squad"]::after {
+  content: "🎖";
+  font-size: 1.5rem;
+}
+td[data-field="squad"][data-squad="false"]::after {
   filter: grayscale(100%);
 }
 

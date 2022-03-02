@@ -3,6 +3,7 @@
 window.addEventListener("DOMContentLoaded", setup);
 //------------------- Variables -------------------
 let allStudents = [];
+let allBloodtypes = [];
 
 const settings = {
   filterBy: "all",
@@ -13,19 +14,31 @@ const settings = {
 function setup() {
   console.log("script er loaded");
   registerButtons();
-  loadJSON();
+  loadData();
 }
 //------------------- JSON -------------------
-async function loadJSON() {
-  const url = "https://petlatkea.dk/2021/hogwarts/students.json";
-  let data = await fetch(url);
-  allStudents = await data.json();
+async function loadData() {
+  const students = await loadStudentJSON();
+  allBloodtypes = await loadBloodJSON();
 
-  //   console.table(allStudents);
-  createStudents(allStudents);
+  async function loadStudentJSON() {
+    const url = "https://petlatkea.dk/2021/hogwarts/students.json";
+    let data = await fetch(url);
+    const students = await data.json();
+    return students;
+  }
+  async function loadBloodJSON() {
+    const url = "https://petlatkea.dk/2021/hogwarts/families.json";
+    let data = await fetch(url);
+    const bloodTypes = await data.json();
+    return bloodTypes;
+  }
+  createStudents(students);
 }
-function createStudents(data) {
-  allStudents = data.map(prepareObject);
+
+function createStudents(students) {
+  allStudents = students.map(prepareObject);
+
   buildList();
 }
 //------------------- Create buttons -------------------
@@ -36,10 +49,11 @@ function registerButtons() {
 }
 //------------------- Create students / clean array -------------------
 function prepareObject(object) {
-  //  allStudents.forEach((object) => {
   // Define a template for the data objects
   const Student = {
     prefect: false,
+    squad: false,
+    fullname: "",
     firstName: "",
     lastName: "",
     middleName: "",
@@ -47,6 +61,7 @@ function prepareObject(object) {
     image: "",
     house: "",
     gender: "",
+    bloodType: "",
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -94,9 +109,27 @@ function prepareObject(object) {
   student.gender = originalGender;
   student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
 
-  // console.table(student);
+  // Call function that calculates blood
+  student.bloodType = calculateBloodType(student);
+
   return student;
 }
+
+// Caltulate blood types
+function calculateBloodType(student) {
+  const pureBlood = allBloodtypes.pure.includes(student.lastName);
+  if (pureBlood === true) {
+    return "pure blood";
+  }
+
+  const halfBlood = allBloodtypes.half.includes(student.lastName);
+  if (halfBlood === true) {
+    return "half blood";
+  }
+
+  return "muggle";
+}
+
 //------------------- Display students/list -------------------
 function displayList(list) {
   document.querySelector("tbody").innerHTML = "";
@@ -115,13 +148,28 @@ function displayStudent(student) {
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
   function clickPrefect() {
-    console.log(student);
     if (student.prefect === true) {
       student.prefect = false;
     } else {
       tryToMakePrefect(student);
     }
     buildList();
+  }
+
+  // Squad-members
+  clone.querySelector("[data-field=squad]").dataset.squad = student.squad;
+  clone.querySelector("[data-field=squad]").addEventListener("click", clickSquad);
+  function clickSquad() {
+    if (student.bloodType === "pure blood") {
+      if (student.squad === true) {
+        student.squad = false;
+      } else {
+        student.squad = true;
+      }
+      buildList();
+    } else {
+      alert("Only students with pure blood can be a member");
+    }
   }
 
   document.querySelector("tbody").appendChild(clone);
@@ -157,6 +205,14 @@ function showPopUp(student) {
   } else if (student.prefect === false) {
     document.querySelector("#pop_up .status").textContent = " " + "no";
   }
+  // Show if squad member or not
+  if (student.squad === true) {
+    document.querySelector(".squad_member").textContent += " " + "yes";
+  } else if (student.squad === false) {
+    document.querySelector(".squad_member").textContent += " " + "no";
+  }
+
+  document.querySelector("#pop_up .bloodtype").textContent = "Blood type:" + " " + student.bloodType;
 
   // show student image
   document.querySelector(".student_pic").src = student.image;
@@ -236,6 +292,14 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(filterBoys);
   } else if (settings.filterBy === "girls") {
     filteredList = allStudents.filter(filterGirls);
+  } else if (settings.filterBy === "pureblood") {
+    filteredList = allStudents.filter(filterPure);
+  } else if (settings.filterBy === "halfblood") {
+    filteredList = allStudents.filter(filterHalf);
+  } else if (settings.filterBy === "muggle") {
+    filteredList = allStudents.filter(filterMuggle);
+  } else if (settings.filterBy === "squad") {
+    filteredList = allStudents.filter(filterSquad);
   }
   return filteredList;
 }
@@ -265,15 +329,20 @@ function filterBoys(student) {
 function filterGirls(student) {
   return student.gender === "Girl";
 }
-// function filterPrefects() {}
+function filterPure(student) {
+  return student.bloodType === "pure blood";
+}
+function filterHalf(student) {
+  return student.bloodType === "half blood";
+}
+function filterMuggle(student) {
+  return student.bloodType === "muggle";
+}
+function filterSquad(student) {
+  return student.squad === true;
+}
 // function filterExpelled() {}
 // function filterNonExpelled() {}
-// function filterSquad() {}
-
-// function filterPureBlood() {}
-// function filterHalfBlood() {}
-// function filterMuggle() {}
-// function removeFilter() {}
 
 // //------------------- All sort functions -------------------
 function selectSort(event) {

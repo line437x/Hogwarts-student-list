@@ -4,23 +4,28 @@ WHAT TO DO??
 
 - Display informations about hogwarts (DONE!!)
 
+- Make search function (DONE!!)
+
 - Create popup
     - Displaying:
-        - Image
-        - Fullname
-        - Firstname
-        - Middle name (if any)
-        - Nick name (if any)
-        - Last name
-        - Fullname
-        - House Crest + color
-        - Blood status
-        - Prefect or not
+        - Image(DONE!!)
+        - Fullname(DONE!!)
+        - Firstname(DONE!!)
+        - Middle name (if any)(DONE!!)
+        - Nick name (if any)(DONE!!)
+        - Last name(DONE!!)
+        - House Crest + color(DONE!!)
+        - Blood status (DONE!!)
+        - Prefect or not(DONE!!)
         - Expelled or not
-        - Member of inquisitorial squad or not
+        - Member of inquisitorial squad or not (DONE!!)
 
 - Create function that can expell student
+
+- Create a function that sets the blood types (DONE!!)
 
 - Create function that can make student prefect og not (DONE!!)
 
 - Create a function that can hack the system
+
+- Check if there is image on every student - then fix it
