@@ -10,12 +10,14 @@ const settings = {
   sortBy: "firstName",
   sortDir: "asc",
 };
+
 //------------------- Setup -------------------
 function setup() {
   console.log("script er loaded");
   registerButtons();
   loadData();
 }
+
 //------------------- JSON -------------------
 async function loadData() {
   const students = await loadStudentJSON();
@@ -41,12 +43,14 @@ function createStudents(students) {
 
   buildList();
 }
+
 //------------------- Create buttons -------------------
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   document.querySelector("#search").addEventListener("input", searchFieldInput);
 }
+
 //------------------- Create students / clean array -------------------
 function prepareObject(object) {
   // Define a template for the data objects
@@ -62,6 +66,7 @@ function prepareObject(object) {
     house: "",
     gender: "",
     bloodType: "",
+    expelled: false,
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -135,6 +140,7 @@ function displayList(list) {
   document.querySelector("tbody").innerHTML = "";
   list.forEach((student) => displayStudent(student));
 }
+
 //------------------- Define students -------------------
 function displayStudent(student) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
@@ -174,12 +180,13 @@ function displayStudent(student) {
 
   document.querySelector("tbody").appendChild(clone);
 }
+
 // //------------------- Pop-up -------------------
 function showPopUp(student) {
   document.querySelector("#pop_up").classList.remove("hide");
 
   document.querySelector("#pop_up .close_button").addEventListener("click", closePopUp);
-  document.querySelector("#pop_up #expel_student").addEventListener("click", expelStudent);
+  document.querySelector("#pop_up #expel_student").addEventListener("click", () => expelStudent(student));
 
   document.querySelector("#pop_up .fullname").textContent = student.firstName + " " + student.nickName + " " + student.middleName + " " + student.lastName;
   document.querySelector("#pop_up .firstname").textContent = "First name:" + " " + student.firstName;
@@ -239,9 +246,17 @@ function showPopUp(student) {
 function closePopUp() {
   document.querySelector("#pop_up").classList.add("hide");
 }
-function expelStudent() {
+
+// //------------------- All non reversible functions -------------------
+function expelStudent(student) {
   console.log("expel student");
+  if (confirm(`Do you want to expel ${student.firstName}?`)) {
+    student.expelled = true;
+    closePopUp();
+    buildList();
+  }
 }
+
 //------------------- Build new list -------------------
 function buildList() {
   const currentList = filterList(allStudents);
@@ -251,6 +266,7 @@ function buildList() {
 
   displayList(sortedList);
 }
+
 //------------------- Info box -------------------
 function displayInfoBox(sortedList) {
   // Display number of students
@@ -277,10 +293,23 @@ function displayInfoBox(sortedList) {
     if (obj.house === "Ravenclaw") ravenclaw++;
     document.querySelector("#info_box [data-field=ravenclaw]").textContent = " " + ravenclaw;
   }
+  let nonExpelled = 0;
+  for (let obj of allStudents) {
+    if (obj.expelled === false) nonExpelled++;
+    document.querySelector("#info_box [data-field=nonexpelled]").textContent = " " + nonExpelled;
+  }
+  let expelled = 0;
+  for (let obj of allStudents) {
+    if (obj.expelled === true) expelled++;
+    document.querySelector("#info_box [data-field=expelled]").textContent = " " + expelled;
+  }
 }
+
 //------------------- All filter functions -------------------
 function filterList(filteredList) {
-  if (settings.filterBy === "gryffindor") {
+  if (settings.filterBy === "expelled") {
+    return allStudents.filter(filterExpelled);
+  } else if (settings.filterBy === "gryffindor") {
     filteredList = allStudents.filter(filterGryffindor);
   } else if (settings.filterBy === "slytherin") {
     filteredList = allStudents.filter(filterSlytherin);
@@ -301,7 +330,8 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "squad") {
     filteredList = allStudents.filter(filterSquad);
   }
-  return filteredList;
+  return filteredList.filter((elm) => elm.expelled === false);
+  // return filteredList;
 }
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
@@ -341,8 +371,9 @@ function filterMuggle(student) {
 function filterSquad(student) {
   return student.squad === true;
 }
-// function filterExpelled() {}
-// function filterNonExpelled() {}
+function filterExpelled(student) {
+  return student.expelled === true;
+}
 
 // //------------------- All sort functions -------------------
 function selectSort(event) {
@@ -452,9 +483,3 @@ function tryToMakePrefect(selectedStudent) {
     student.prefect = true;
   }
 }
-
-// //------------------- All non reversible functions -------------------
-// function expelStudent() {}
-// function hackSystem() {}
-
-// //------------------- Pop-up -------------------
