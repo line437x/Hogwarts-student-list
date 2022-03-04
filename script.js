@@ -194,6 +194,9 @@ function showPopUp(student) {
 
   document.querySelector("#pop_up .close_button").addEventListener("click", closePopUp);
   document.querySelector("#pop_up #expel_student").addEventListener("click", () => expelStudent(student));
+  if (student.expelled === true) {
+    document.querySelector("#pop_up #expel_student").classList.add("hide");
+  }
 
   document.querySelector("#pop_up .fullname").textContent = student.firstName + " " + student.nickName + " " + student.middleName + " " + student.lastName;
   document.querySelector("#pop_up .firstname").textContent = "First name:" + " " + student.firstName;
@@ -215,15 +218,22 @@ function showPopUp(student) {
 
   // Show if prefect or not
   if (student.prefect === true) {
-    document.querySelector("#pop_up .status").textContent = " " + "yes";
+    document.querySelector("#pop_up .prefect .status").textContent = " " + "yes";
   } else if (student.prefect === false) {
-    document.querySelector("#pop_up .status").textContent = " " + "no";
+    document.querySelector("#pop_up .prefect .status").textContent = " " + "no";
   }
   // Show if squad member or not
   if (student.squad === true) {
     document.querySelector(".squad_member").textContent += " " + "yes";
   } else if (student.squad === false) {
     document.querySelector(".squad_member").textContent += " " + "no";
+  }
+
+  // Show if expelled or not
+  if (student.expelled === true) {
+    document.querySelector("#pop_up .expelled .status").textContent = " " + "yes";
+  } else if (student.expelled === false) {
+    document.querySelector("#pop_up .expelled .status").textContent = " " + "no";
   }
 
   document.querySelector("#pop_up .bloodtype").textContent = "Blood type:" + " " + student.bloodType;
