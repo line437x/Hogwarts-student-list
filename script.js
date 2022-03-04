@@ -54,6 +54,7 @@ function registerButtons() {
 //------------------- Create students / clean array -------------------
 function prepareObject(object) {
   // Define a template for the data objects
+
   const Student = {
     prefect: false,
     squad: false,
@@ -156,6 +157,9 @@ function displayStudent(student) {
   function clickPrefect() {
     if (student.prefect === true) {
       student.prefect = false;
+    } else if (student.expelled === true) {
+      student.prefect = false;
+      alert("This student is expelled and cannot become prefect");
     } else {
       tryToMakePrefect(student);
     }
@@ -169,6 +173,9 @@ function displayStudent(student) {
     if (student.bloodType === "pure blood") {
       if (student.squad === true) {
         student.squad = false;
+      } else if (student.expelled === true) {
+        student.squad = false;
+        alert("This student is expelled and cannot become a member");
       } else {
         student.squad = true;
       }
@@ -252,6 +259,8 @@ function expelStudent(student) {
   console.log("expel student");
   if (confirm(`Do you want to expel ${student.firstName}?`)) {
     student.expelled = true;
+    student.prefect = false;
+    student.squad = false;
     closePopUp();
     buildList();
   }
