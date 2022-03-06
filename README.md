@@ -1,3 +1,3 @@
-https://line437x.github.io/Hogwarts-student-list/
+GitHub pages: https://line437x.github.io/Hogwarts-student-list/
 
-Eget domæne:
+Own webpage: http://lineberner.com/kea/3_semester/hogwarts_student_list/
