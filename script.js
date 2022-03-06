@@ -159,7 +159,7 @@ function displayStudent(student) {
       student.prefect = false;
     } else if (student.expelled === true) {
       student.prefect = false;
-      alert("This student is expelled and cannot become prefect");
+      alert(`This student is expelled and cannot become prefect of ${student.house}`);
     } else {
       tryToMakePrefect(student);
     }
@@ -170,18 +170,18 @@ function displayStudent(student) {
   clone.querySelector("[data-field=squad]").dataset.squad = student.squad;
   clone.querySelector("[data-field=squad]").addEventListener("click", clickSquad);
   function clickSquad() {
-    if (student.bloodType === "pure blood") {
+    if (student.bloodType === "pure blood" && student.house === "Slytherin") {
       if (student.squad === true) {
         student.squad = false;
       } else if (student.expelled === true) {
         student.squad = false;
-        alert("This student is expelled and cannot become a member");
+        alert("This student is expelled and cannot become a member of inquisitorial squad");
       } else {
         student.squad = true;
       }
       buildList();
     } else {
-      alert("Only students with pure blood can be a member");
+      alert("Only students from Slytherin with pure blood can be a member of inquisitorial squad");
     }
   }
 
@@ -224,9 +224,9 @@ function showPopUp(student) {
   }
   // Show if squad member or not
   if (student.squad === true) {
-    document.querySelector(".squad_member").textContent += " " + "yes";
+    document.querySelector(".squad_member .status").textContent = " " + "yes";
   } else if (student.squad === false) {
-    document.querySelector(".squad_member").textContent += " " + "no";
+    document.querySelector(".squad_member .status").textContent = " " + "no";
   }
 
   // Show if expelled or not
